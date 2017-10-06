@@ -1,0 +1,28 @@
+{
+  "name": "friendship-circle",
+  "version": "1.0.0",
+  "description": "a webring script",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmho/friendship-circle.git"
+  },
+  "keywords": [
+    "webring",
+    "nodejs"
+  ],
+  "author": "Carly Ho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cmho/friendship-circle/issues"
+  },
+  "homepage": "https://github.com/cmho/friendship-circle#readme",
+  "dependencies": {
+    "active_record": "^0.1.6",
+    "express": "^4.16.1",
+    "passport": "^0.4.0"
+  }
+}
