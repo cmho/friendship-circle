@@ -106,11 +106,30 @@ get '/site/:id' do
 end
 
 get '/join' do
-
+  slim :join
 end
 
 post '/join' do
-  
+  @user = User.new({
+    email: params[:user][:email],
+    site_name: params[:user][:site_name],
+    site_url: params[:user][:site_url],
+    site_description: params[:user][:site_description]
+  })
+	if params[:password] == params[:confirm_password]
+		@user.password = params[:password]
+		if @user.save
+			session[:user] = @user.id
+			flash[:success] = "Thanks for registering, #{@user.username}! You are now logged in."
+			redirect to('/')
+		else
+			flash[:error] = "There was an error with your registration."
+			slim :join
+		end
+	else
+		flash[:error] = "Your password confirmation did not match your password."
+		slim :join
+	end
 end
 
 get '/login' do
