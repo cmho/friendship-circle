@@ -40,11 +40,13 @@ get '/' do
 end
 
 get '/site/:id/prev' do
-
+  user = User.find(params[:id])
+  redirect user.prev.site_url
 end
 
 get '/site/:id/next' do
-
+  user = User.find(params[:id])
+  redirect user.next.site_url
 end
 
 get '/site/:id' do
