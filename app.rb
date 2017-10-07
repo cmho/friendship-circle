@@ -1,10 +1,27 @@
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'sinatra/flash'
+require 'sinatra/base'
+require 'sinatra/partial'
+require 'sinatra/content_for'
+require 'bcrypt'
 require 'slim'
+require "sinatra/config_file"
+require "rack/csrf"
+
+config_file 'config/application.yml'
 
 set :database_file, "config/database.yml"
+set :partial_template_engine, :slim
+enable :partial_underscores
+
+configure do
+  use Rack::Session::Cookie, :secret => "YOUR SECRET GOES HERE"
+  use Rack::Csrf, :raise => true
+end
 
 class User < ActiveRecord::Base
+  include BCrypt
   validates_presence_of :username, :display_name, :site_name, :site_url
 
   def next
@@ -32,10 +49,45 @@ class User < ActiveRecord::Base
       false
     end
   end
+
+  def password
+		@password ||= Password.new(password_digest)
+	end
+
+	def password=(new_password)
+		@password = Password.create(new_password)
+		self.password_digest = @password
+	end
+
+  def is_admin?
+    self.is_admin
+  end
+
+  def is_approved?
+    self.is_approved
+  end
+end
+
+helpers do
+	def is_logged_in?
+		return session[:user].present?
+	end
+
+  def current_user
+    User.find(session[:user])
+  end
+
+  def csrf_token
+    Rack::Csrf.csrf_token(env)
+  end
+
+  def csrf_tag
+    Rack::Csrf.csrf_tag(env)
+  end
 end
 
 get '/' do
-  users = User.all.order(:id)
+  @sites = User.all.order(:id)
   slim :index, :layout => :application
 end
 
@@ -50,17 +102,61 @@ get '/site/:id/next' do
 end
 
 get '/site/:id' do
-  site = User.find(params[:id])
+  @site = User.find(params[:id])
+end
+
+get '/join' do
+
+end
+
+post '/join' do
+  
 end
 
 get '/login' do
-
+  slim :login, :layout => :application
 end
 
 post '/login' do
-
+  @user = User.find_by_email(params[:user][:email])
+  if @user.password == params[:user][:password]
+    session[:user] = @user.id
+    flash[:success] = "Welcome, #{current_user.display_name}!"
+    redirect '/'
+  else
+    flash[:error] = "Your username or password was incorrect."
+    slim :login
+  end
 end
 
 post '/logout' do
+  if session[:user]
+		session[:user] = nil
+	end
+	redirect '/'
+end
+
+get '/forgot_password' do
+  slim :forgot_password, :layout => :application
+end
+
+post '/forgot_password' do
+  @user = User.find_by_email(params[:user][:email])
+  if @user.present?
+    user.reset_token = Array.new(10).map { (65 + rand(58)).chr }.join
+    flash[:success] = "An email allowing you to reset your password has been sent. Please check your inbox."
+    # send the email
+  else
+    flash[:error] = "No user with that email address found."
+    redirect '/forgot_password'
+  end
+end
+
+get '/reset_password' do
+  slim :reset_password, :layout => :application
+end
+
+post '/reset_password' do
+  @user = User.find(params[:user][:id])
 
 end

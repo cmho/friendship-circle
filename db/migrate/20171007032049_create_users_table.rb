@@ -6,6 +6,8 @@ class CreateUsersTable < ActiveRecord::Migration[5.1]
       t.string :site_name, null: false
       t.string :site_url, null: false
       t.text :site_description
+      t.string :confirm_token
+      t.string :reset_token
       t.boolean :is_admin, default: false
       t.boolean :is_approved, default: false
     end
