@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'slim'
 
 set :database_file, "config/database.yml"
 
@@ -23,11 +24,19 @@ class User < ActiveRecord::Base
 
     prev_user
   end
+
+  def authenticate(attempted_password)
+    if self.password == attempted_password
+      true
+    else
+      false
+    end
+  end
 end
 
 get '/' do
   users = User.all.order(:id)
-  render :index
+  slim :index, :layout => :application
 end
 
 get '/site/:id/prev' do
@@ -40,4 +49,16 @@ end
 
 get '/site/:id' do
   site = User.find(params[:id])
+end
+
+get '/login' do
+
+end
+
+post '/login' do
+
+end
+
+post '/logout' do
+
 end
