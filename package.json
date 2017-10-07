@@ -24,6 +24,7 @@
     "active_record": "^0.1.6",
     "express": "^4.16.1",
     "express-asset-manager": "^1.0.2",
-    "passport": "^0.4.0"
+    "passport": "^0.4.0",
+    "pug": "^2.0.0-rc.4"
   }
 }

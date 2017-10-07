@@ -1,10 +1,13 @@
 const express = require('express');
-const activerecord = require('active_record');
+const ActiveRecord = require('active_record');
 const app = express();
 
 module.exports = User;
 
 ActiveRecord.Base.extend(User, ActiveRecord.Base);
+
+app.use(express.static('public'));
+app.set('view engine', 'pug');
 
 function User () {
 	this.initialize(arguments[0]);
@@ -38,15 +41,29 @@ User.prev = function() {
 }
 
 app.get('/', function (req, res) {
-
+  res.render('index', {message: 'hello, world!', heading: 'hello!!'});
 });
 
-app.get('/user/:id/next', function (req, res) {
-	var user = User.find(req.params.id);
-	return user.next.site_url;
+app.get('/site/:id', function (req, res) {
+  var user = User.find(this.id);
+  res.render('site', {user: user});
 });
 
-app.get('/user/:id/prev', function (req, res) {
+app.get('/site/:id/next', function (req, res) {
 	var user = User.find(req.params.id);
-	return user.prev.site_url;
+	res.send(user.next.site_url);
+});
+
+app.get('/site/:id/prev', function (req, res) {
+	var user = User.find(req.params.id);
+	res.send(user.prev.site_url);
+});
+
+app.get('/admin', function (req, res) {
+  var users = User.all;
+  res.render('admin', {users: users});
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
 });
