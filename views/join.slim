@@ -1,3 +1,5 @@
+h2 Apply to join #{settings.ring_name}
+
 form method="post"
   == csrf_tag
 
@@ -23,7 +25,7 @@ form method="post"
 
   .form-row
     label for="password" Password
-    input type="password" placeholder="password" name="password"
+    input type="password" placeholder="Password" name="password"
 
   .form-row
     label for="confirm_password" Confirm Password

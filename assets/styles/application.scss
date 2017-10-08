@@ -15,7 +15,6 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   margin: 0;
-  padding: 50px;
 }
 
 a {
@@ -30,8 +29,8 @@ a {
 }
 
 h1 {
-  font-size: 48px;
-  line-height: 56px;
+  font-size: 64px;
+  line-height: 64px;
   font-family: 'Lily Script One', cursive;
   font-weight: normal;
 }
@@ -51,6 +50,43 @@ h3 {
 h4 {
   font-size: 16px;
   margin-bottom: 0;
+}
+
+header#header {
+  text-align: center;
+  margin-top: 50px;
+
+  h1 a {
+    color: $foreground;
+
+    &:hover {
+      border-bottom: 1px transparent solid;
+    }
+  }
+
+  nav#navigation {
+    ul {
+      list-style: none;
+      margin: 20px 0;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin: 0 10px;
+        a {
+          text-transform: uppercase;
+          font-weight: 700;
+          letter-spacing: 2px;
+        }
+      }
+    }
+  }
+}
+
+main#main {
+  max-width: 600px;
+  padding: 0 20px;
+  margin: 50px auto;
 }
 
 #links-list {

@@ -1,14 +1,15 @@
 require 'sinatra'
 require 'sinatra/activerecord'
-require 'sinatra/flash'
-require 'sinatra/base'
-require 'sinatra/partial'
-require 'sinatra/content_for'
-require 'bcrypt'
-require 'slim'
-require "sinatra/config_file"
-require "rack/csrf"
 require 'sinatra/asset_pipeline'
+require 'sinatra/base'
+require "sinatra/config_file"
+require 'sinatra/content_for'
+require 'sinatra/flash'
+require 'sinatra/partial'
+require 'bcrypt'
+require 'rack/csrf'
+require 'redcarpet'
+require 'slim'
 
 set :assets_css_compressor, :sass
 set :assets_js_compressor, :uglifier
@@ -32,18 +33,18 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   def next
-    next_user = User.find(self.id + 1)
+    next_user = User.where('id > ?' self.id).order('id desc').where(is_active: true).first
     if next_user.empty?
-      next_user = User.first
+      next_user = User.where(is_active: true).order('id desc').first
     end
 
     next_user
   end
 
   def prev
-    prev_user = User.find(self.id - 1)
+    prev_user = User.where('id < ?' self.id).order('id desc').where(is_active: true).last
     if prev_user.empty?
-      prev_user = User.last
+      prev_user = User.User.where(is_active: true).order('id desc').last
     end
 
     prev_user
@@ -114,6 +115,23 @@ end
 
 get '/site/:id' do
   @site = User.find(params[:id])
+end
+
+get '/list' do
+  @sites = User.all.order(:id)
+  slim :list, :layout => :application
+end
+
+get '/rules' do
+  slim :rules, :layout => :application
+end
+
+get '/manage' do
+  slim :manage, :layout => :application
+end
+
+post '/manage' do
+
 end
 
 get '/join' do
@@ -193,6 +211,6 @@ end
 
 get '/confirm_account' do
   if params[:confirmation_token].present?
-    
+
   end
 end
