@@ -8,6 +8,12 @@ require 'bcrypt'
 require 'slim'
 require "sinatra/config_file"
 require "rack/csrf"
+require 'sinatra/asset_pipeline'
+
+set :assets_css_compressor, :sass
+set :assets_js_compressor, :uglifier
+
+register Sinatra::AssetPipeline
 
 config_file 'config/application.yml'
 
@@ -22,7 +28,8 @@ end
 
 class User < ActiveRecord::Base
   include BCrypt
-  validates_presence_of :username, :display_name, :site_name, :site_url
+  validates_presence_of :email, :display_name, :site_name, :site_url
+  validates :email, uniqueness: true
 
   def next
     next_user = User.find(self.id + 1)
@@ -51,12 +58,12 @@ class User < ActiveRecord::Base
   end
 
   def password
-		@password ||= Password.new(password_digest)
+		@password ||= Password.new(password)
 	end
 
 	def password=(new_password)
 		@password = Password.create(new_password)
-		self.password_digest = @password
+		self.password = @password
 	end
 
   def is_admin?
@@ -74,7 +81,11 @@ helpers do
 	end
 
   def current_user
-    User.find(session[:user])
+    if session[:user]
+      return User.find(session[:user])
+    end
+
+    return nil
   end
 
   def csrf_token
@@ -106,7 +117,7 @@ get '/site/:id' do
 end
 
 get '/join' do
-  slim :join
+  slim :join, :layout => :application
 end
 
 post '/join' do
@@ -124,11 +135,11 @@ post '/join' do
 			redirect to('/')
 		else
 			flash[:error] = "There was an error with your registration."
-			slim :join
+			slim :join, :layout => :application
 		end
 	else
 		flash[:error] = "Your password confirmation did not match your password."
-		slim :join
+		slim :join, :layout => :application
 	end
 end
 

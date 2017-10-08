@@ -95,6 +95,7 @@ label {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"],
 input[type="search"],
 input[type="url"],
@@ -120,8 +121,12 @@ textarea {
   margin-bottom: 1em;
 }
 
-input[type="submit"] {
+input[type="submit"],
+.button {
   height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: center;
   background-color: $link;
   font-family: 'Roboto', sans-serif;
   color: white;
@@ -137,5 +142,15 @@ input[type="submit"] {
 
   &:hover {
     transform: translateY(-2px);
+  }
+}
+
+.button-row {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+
+  &.center {
+    justify-content: center;
   }
 }

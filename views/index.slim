@@ -1,1 +1,19 @@
-h1 hello, world!!
+#ring-description
+  = settings.ring_description
+
+.button-row.center
+  - if current_user.nil?
+    a href='/join' class='button' Join
+  - elsif current_user.is_admin?
+    a href='/admin' class='button' Manage
+  - else
+    a href="/manage" class='button' Manage
+
+- if @sites.present?
+  ul#links-list
+    - @sites.each do |site|
+      li
+        h3
+          = link_to site.site_name, site.site_url, rel: 'external', target: '_blank'
+
+        p.description #{AutoExcerpt.new(site.site_description, {words: 25, strip_paragraphs: true})}

@@ -1,9 +1,16 @@
 doctype html
 html lang="en"
   head
-    title
+    title #{settings.ring_name}
+    link rel="stylesheet" type="text/css" href="/assets/styles/application.css"
+
   body
     header#header
-      h1 Friendship Circle
+      h1
+        a href="/" #{settings.ring_name}
     main#main
+      - if flash.present?
+        ul.messages
+          - flash.each do |msg_type, msg|
+            li class="#{msg_type}" #{msg}
       == yield
