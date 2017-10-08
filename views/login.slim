@@ -1,0 +1,13 @@
+form method="post"
+  == csrf_tag
+
+  .form-row
+    label for="email" Email
+    input type="email" placeholder="Email" name="user[email]"
+
+  .form-row
+    label for="password" Password
+    input type="password" placeholder="password" name="user[password]"
+
+  .form-row
+    input type="submit" value="Log In"

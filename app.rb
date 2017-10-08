@@ -190,3 +190,9 @@ post '/reset_password' do
   @user = User.find(params[:user][:id])
 
 end
+
+get '/confirm_account' do
+  if params[:confirmation_token].present?
+    
+  end
+end

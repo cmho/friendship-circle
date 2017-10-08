@@ -1,0 +1,14 @@
+.profile
+  h2
+    a href="#{@site.site_url}" rel="external" target="_blank" #{@site.site_name}
+
+  p
+    strong Owner:
+    = " #{@site.display_name}"
+
+  .description
+    = site.site_description
+
+  nav.site-links
+    a class="prev-link" href="/sites/#{@site.prev.id}" Prev: #{@site.prev.site_name}
+    a class="next-link" href="/sites/#{@site.next.id}" Next: #{@site.next.site_name}
