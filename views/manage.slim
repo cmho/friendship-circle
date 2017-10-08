@@ -1,4 +1,32 @@
 h2 Manage Account
 
 p.status
-  strong 
+  strong Account Status:
+  - if current_user.is_active?
+    = " Active"
+  - else
+    = " Pending Approval"
+
+h3 Update Information
+
+form method="post"
+  = csrf_tag
+
+  .form-row
+    label for="display_name" Display Name
+    input type="text" placeholder="Display Name" name="user[display_name]"
+
+  .form-row
+    label for="site_name" Site Name
+    input type="text" placeholder="Site Name" name="user[site_name]"
+
+  .form-row
+    label for="site_url" Site URL
+    input type="url" placeholder="Site URL" name="user[site_url]"
+
+  .form-row
+    label for="site_description" Site Description
+    textarea placeholder="Site Description" name="user[site_description]"
+
+  .form-row
+    input type="submit" value="Save Changes"

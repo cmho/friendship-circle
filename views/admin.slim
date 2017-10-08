@@ -1,0 +1,34 @@
+h2 Administration
+
+- if @sites.present?
+  ul#admin-list
+    - @sites.each do |site|
+      li
+        h3 #{site.site_name}
+        p
+          strong User:
+          = " #{site.display_name}"
+
+        p
+          strong Site Address:
+          = " #{site.site_url}"
+
+        p
+          strong Code Detected:
+          
+
+        p
+          strong Site Description:
+        .description
+          = site.site_description
+
+        nav.admin-links
+          ul
+            li
+              a href="/admin/sites/#{site.id}/edit" Edit
+            - unless site.is_approved?
+              li
+                a href="#" class="approve-link" Approve
+            - else
+              li
+                a href="#" class="active-link" Set Inactive

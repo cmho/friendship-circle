@@ -33,36 +33,30 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   def next
-    next_user = User.where('id > ?' self.id).order('id desc').where(is_active: true).first
+    next_user = User.where('id > ?', self.id).order(id: :desc).where(is_active: true).first
     if next_user.empty?
-      next_user = User.where(is_active: true).order('id desc').first
+      next_user = User.where(is_active: true).order(id: :desc).first
     end
 
     next_user
   end
 
   def prev
-    prev_user = User.where('id < ?' self.id).order('id desc').where(is_active: true).last
+    prev_user = User.where('id < ?', self.id).order(id: :desc).where(is_active: true).last
     if prev_user.empty?
-      prev_user = User.User.where(is_active: true).order('id desc').last
+      prev_user = User.where(is_active: true).order('id desc').last
     end
 
     prev_user
   end
 
-  def authenticate(attempted_password)
-    if self.password == attempted_password
-      true
-    else
-      false
-    end
-  end
-
   def password
+    puts "h"
 		@password ||= Password.new(password)
 	end
 
 	def password=(new_password)
+    puts "i"
 		@password = Password.create(new_password)
 		self.password = @password
 	end
@@ -150,14 +144,14 @@ post '/join' do
 		if @user.save
 			session[:user] = @user.id
 			flash[:success] = "Thanks for registering, #{@user.username}! You are now logged in."
-			redirect to('/')
+			redirect '/'
 		else
 			flash[:error] = "There was an error with your registration."
-			slim :join, :layout => :application
+      redirect '/join'
 		end
 	else
 		flash[:error] = "Your password confirmation did not match your password."
-		slim :join, :layout => :application
+		redirect '/join'
 	end
 end
 
