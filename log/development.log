@@ -1,0 +1,404 @@
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20171010001753)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar NOT NULL, "display_name" varchar NOT NULL, "site_name" varchar NOT NULL, "site_url" varchar NOT NULL, "site_description" text NOT NULL, "is_active" boolean DEFAULT 'f', "is_admin" boolean DEFAULT 'f', "last_reviewed" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171010001753"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddDeviseToUsers (20171010002340)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.6ms)[0m  [1m[35mALTER TABLE "users" ADD "email" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (3.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "friendship_circle_development"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "friendship_circle_test"[0m
+  [1m[35m (368.2ms)[0m  [1m[35mCREATE DATABASE "friendship_circle_development" ENCODING = 'utf8'[0m
+  [1m[35m (293.9ms)[0m  [1m[35mCREATE DATABASE "friendship_circle_test" ENCODING = 'utf8'[0m
+  [1m[35m (11.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4009284207309526005)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20171010001753)
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying NOT NULL, "display_name" character varying NOT NULL, "site_name" character varying NOT NULL, "site_url" character varying NOT NULL, "site_description" text NOT NULL, "is_active" boolean DEFAULT 'f', "is_admin" boolean DEFAULT 'f', "last_reviewed" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171010001753"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDeviseToUsers (20171010002340)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4009284207309526005)[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-10-10 00:50:13.119428"], ["updated_at", "2017-10-10 00:50:13.119428"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (178.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "friendship_circle_development"[0m
+  [1m[35m (144.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "friendship_circle_test"[0m
+  [1m[35m (371.5ms)[0m  [1m[35mCREATE DATABASE "friendship_circle_development" ENCODING = 'unicode'[0m
+  [1m[35m (284.1ms)[0m  [1m[35mCREATE DATABASE "friendship_circle_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4009284207309526005)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20171010001753)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying NOT NULL, "display_name" character varying NOT NULL, "site_name" character varying NOT NULL, "site_url" character varying NOT NULL, "site_description" text NOT NULL, "is_active" boolean DEFAULT 'f', "is_admin" boolean DEFAULT 'f', "last_reviewed" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171010001753"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDeviseToUsers (20171010002340)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4009284207309526005)[0m
+Started GET "/" for 127.0.0.1 at 2017-10-09 21:56:32 -0500
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.1.4) lib/active_record/migration.rb:576:in `check_pending!'
+activerecord (5.1.4) lib/active_record/migration.rb:553:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.4) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.4) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+thin (1.7.2) lib/thin/connection.rb:86:in `block in pre_process'
+thin (1.7.2) lib/thin/connection.rb:84:in `catch'
+thin (1.7.2) lib/thin/connection.rb:84:in `pre_process'
+thin (1.7.2) lib/thin/connection.rb:53:in `process'
+thin (1.7.2) lib/thin/connection.rb:39:in `receive_data'
+eventmachine (1.2.5) lib/eventmachine.rb:194:in `run_machine'
+eventmachine (1.2.5) lib/eventmachine.rb:194:in `run'
+thin (1.7.2) lib/thin/backends/base.rb:73:in `start'
+thin (1.7.2) lib/thin/server.rb:162:in `start'
+thin (1.7.2) lib/thin/controllers/controller.rb:87:in `start'
+thin (1.7.2) lib/thin/runner.rb:203:in `run_command'
+thin (1.7.2) lib/thin/runner.rb:159:in `run!'
+thin (1.7.2) bin/thin:6:in `<top (required)>'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/thin:22:in `load'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/thin:22:in `<main>'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/ruby_executable_hooks:15:in `eval'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/ruby_executable_hooks:15:in `<main>'
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4009284207309526005)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddDeviseToUsers (20171010002340)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(4009284207309526005)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-10-10 02:57:01.912920"], ["updated_at", "2017-10-10 02:57:01.912920"]]
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (157.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "friendship_circle_development"[0m
+  [1m[35m (149.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "friendship_circle_test"[0m
+  [1m[35m (401.6ms)[0m  [1m[35mCREATE DATABASE "friendship_circle_development" ENCODING = 'unicode'[0m
+  [1m[35m (265.5ms)[0m  [1m[35mCREATE DATABASE "friendship_circle_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4009284207309526005)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20171010001753)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying NOT NULL, "display_name" character varying NOT NULL, "site_name" character varying NOT NULL, "site_url" character varying NOT NULL, "site_description" text NOT NULL, "is_active" boolean DEFAULT 'f', "is_admin" boolean DEFAULT 'f', "last_reviewed" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171010001753"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDeviseToUsers (20171010002340)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4009284207309526005)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4009284207309526005)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddDeviseToUsers (20171010002340)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (30.0ms)[0m  [1m[35mALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (5.2ms)[0m  [1m[35mALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_ip" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmation_token" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmed_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmation_sent_at" timestamp[0m
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_confirmation_token" ON "users"  ("confirmation_token")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171010002340"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-10-10 02:58:14.211876"], ["updated_at", "2017-10-10 02:58:14.211876"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(4009284207309526005)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2017-10-09 21:58:22 -0500
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  Rendered home/index.slim within layouts/application (41.7ms)
+Completed 500 Internal Server Error in 74ms (ActiveRecord: 5.2ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `settings' for #<#<Class:0x007f8e2bc30d00>:0x007f8e2bc135e8>
+Did you mean?  String):
+    1: #ring-description
+    2:   = settings.ring_description
+    3: 
+    4: - if @sites.present?
+    5:   ul#links-list
+  
+app/views/home/index.slim:2:in `_app_views_home_index_slim___2052125777547422778_70124298146900'
+Started GET "/" for 127.0.0.1 at 2017-10-09 22:00:06 -0500
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.1.4) lib/active_record/migration.rb:576:in `check_pending!'
+activerecord (5.1.4) lib/active_record/migration.rb:553:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.4) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.4) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+thin (1.7.2) lib/thin/connection.rb:86:in `block in pre_process'
+thin (1.7.2) lib/thin/connection.rb:84:in `catch'
+thin (1.7.2) lib/thin/connection.rb:84:in `pre_process'
+thin (1.7.2) lib/thin/connection.rb:53:in `process'
+thin (1.7.2) lib/thin/connection.rb:39:in `receive_data'
+eventmachine (1.2.5) lib/eventmachine.rb:194:in `run_machine'
+eventmachine (1.2.5) lib/eventmachine.rb:194:in `run'
+thin (1.7.2) lib/thin/backends/base.rb:73:in `start'
+thin (1.7.2) lib/thin/server.rb:162:in `start'
+thin (1.7.2) lib/thin/controllers/controller.rb:87:in `start'
+thin (1.7.2) lib/thin/runner.rb:203:in `run_command'
+thin (1.7.2) lib/thin/runner.rb:159:in `run!'
+thin (1.7.2) bin/thin:6:in `<top (required)>'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/thin:22:in `load'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/thin:22:in `<main>'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/ruby_executable_hooks:15:in `eval'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/ruby_executable_hooks:15:in `<main>'
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4009284207309526005)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateSettings (20171010025841)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "settings" ("id" bigserial primary key, "var" character varying NOT NULL, "value" text, "thing_id" integer, "thing_type" character varying(30), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_settings_on_thing_type_and_thing_id_and_var" ON "settings"  ("thing_type", "thing_id", "var")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171010025841"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4009284207309526005)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2017-10-09 22:00:22 -0500
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  Rendered home/index.slim within layouts/application (122.4ms)
+Completed 500 Internal Server Error in 163ms (ActiveRecord: 5.7ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `settings' for #<#<Class:0x007faac1bbb200>:0x007faac1375cd0>
+Did you mean?  String):
+    1: #ring-description
+    2:   = settings.ring_description
+    3: 
+    4: - if @sites.present?
+    5:   ul#links-list
+  
+app/views/home/index.slim:2:in `_app_views_home_index_slim__627838061376430189_70185685766820'
+Started GET "/" for 127.0.0.1 at 2017-10-09 22:01:01 -0500
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  [1m[36mSetting Load (1.7ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_description"], ["LIMIT", 1]]
+  Rendered home/index.slim within layouts/application (28.3ms)
+Completed 200 OK in 548ms (Views: 529.0ms | ActiveRecord: 12.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-09 22:02:35 -0500
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  [1m[36mSetting Load (0.5ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_description"], ["LIMIT", 1]]
+  Rendered home/index.slim within layouts/application (5.5ms)
+  [1m[36mSetting Load (0.7ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 47ms (Views: 40.8ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-09 22:03:08 -0500
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_description"], ["LIMIT", 1]]
+  Rendered home/index.slim within layouts/application (8.4ms)
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 84ms (Views: 72.4ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-09 22:04:53 -0500
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  [1m[36mSetting Load (1.3ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.5ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_description"], ["LIMIT", 1]]
+  Rendered home/index.slim within layouts/application (41.7ms)
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 353ms (ActiveRecord: 15.7ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `new_user_path' for #<#<Class:0x007fe07b2667c8>:0x007fe07a739d78>
+Did you mean?  new_user_session_path):
+    21:           = link_to "Rules", rules_path
+    22:         - if current_user.nil?
+    23:           li
+    24:             = link_to "Join", new_user_path
+    25:           li
+    26:             = link_to "Log In", new_user_session_path
+    27: 
+  
+app/views/layouts/application.slim:24:in `_app_views_layouts_application_slim__378341856250838089_70301051667300'
+Started GET "/" for 127.0.0.1 at 2017-10-09 22:05:21 -0500
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  [1m[36mSetting Load (1.0ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_description"], ["LIMIT", 1]]
+  Rendered home/index.slim within layouts/application (8.0ms)
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 55ms (Views: 44.9ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-09 22:07:07 -0500
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  [1m[36mSetting Load (0.5ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.4ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_description"], ["LIMIT", 1]]
+  Rendered home/index.slim within layouts/application (13.6ms)
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 53ms (Views: 39.4ms | ActiveRecord: 8.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-09 22:07:07 -0500
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_description"], ["LIMIT", 1]]
+  Rendered home/index.slim within layouts/application (15.7ms)
+  [1m[36mSetting Load (0.4ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 46ms (Views: 41.4ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/sites/sign_up" for 127.0.0.1 at 2017-10-09 22:07:43 -0500
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering /Users/Carly/.rvm/gems/ruby-2.4.0/gems/devise-4.3.0/app/views/devise/registrations/new.html.erb within layouts/application
+  Rendered /Users/Carly/.rvm/gems/ruby-2.4.0/gems/devise-4.3.0/app/views/devise/shared/_links.html.erb (2.0ms)
+  Rendered /Users/Carly/.rvm/gems/ruby-2.4.0/gems/devise-4.3.0/app/views/devise/registrations/new.html.erb within layouts/application (31.3ms)
+  [1m[36mSetting Load (0.5ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.4ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 123ms (Views: 68.7ms | ActiveRecord: 11.7ms)
+
+
+Started GET "/sites/sign_in" for 127.0.0.1 at 2017-10-09 22:07:54 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering /Users/Carly/.rvm/gems/ruby-2.4.0/gems/devise-4.3.0/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /Users/Carly/.rvm/gems/ruby-2.4.0/gems/devise-4.3.0/app/views/devise/shared/_links.html.erb (3.5ms)
+  Rendered /Users/Carly/.rvm/gems/ruby-2.4.0/gems/devise-4.3.0/app/views/devise/sessions/new.html.erb within layouts/application (23.0ms)
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 110ms (Views: 104.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/rules" for 127.0.0.1 at 2017-10-09 22:07:58 -0500
+Processing by HomeController#rules as HTML
+  Rendering home/rules.slim within layouts/application
+  Rendered home/rules.slim within layouts/application (8.0ms)
+  [1m[36mSetting Load (0.9ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 105ms (Views: 95.4ms | ActiveRecord: 0.9ms)
+
+

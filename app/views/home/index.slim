@@ -1,0 +1,14 @@
+#ring-description
+  = Setting.ring_description
+
+- if @sites.present?
+  ul#links-list
+    - @sites.each do |site|
+      li
+        h3
+          a href="#{site.site_url}" rel="external" target="_blank" #{site.site_name}
+
+        p.description
+          = AutoExcerpt.new(site.site_description, {words: 25, strip_paragraphs: true})
+          = " "
+          a href="/sites/#{site.id}" Read More
