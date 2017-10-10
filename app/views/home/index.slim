@@ -1,0 +1,20 @@
+#ring-description
+  = Setting.ring_description
+
+  - unless current_user.present?
+    .button-row.center
+      = link_to "Apply to Join", new_user_registration_path, class: 'button'
+
+- if @sites.present?
+  h2 Random Links
+
+  ul#links-list
+    - @sites.each do |site|
+      li
+        h3
+          = link_to site.site_name, site.site_url, rel: 'external', target: '_blank'
+
+        p.description
+          = AutoExcerpt.new(site.site_description, {words: 25, strip_paragraphs: true})
+          = " "
+          = link_to "Read More", sites_path(site.id)

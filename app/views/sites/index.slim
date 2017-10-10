@@ -1,0 +1,10 @@
+h2 All Links
+
+- if @sites.present?
+  ul#links-list
+    - @sites.each do |site|
+      li
+        h3
+          = link_to site.site_name, site.site_url, rel: 'external', target: '_blank'
+
+        p.description #{AutoExcerpt.new(site.site_description, {words: 25, strip_paragraphs: true})}

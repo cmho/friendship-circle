@@ -1,0 +1,43 @@
+doctype html
+html lang="en"
+  head
+    title #{Setting.ring_name}
+    link rel="stylesheet" type="text/css" href="/assets/styles/application.css"
+
+  body
+    header#header
+      h1
+        a href="/" #{Setting.ring_name}
+      nav#navigation
+        ul
+          li
+            a href="/" Home
+          li
+            a href="/list" List
+          li
+            a href="/rules" Rules
+          - if current_user.nil?
+            li
+              a href="/join" Join
+            li
+              a href="/login" Log In
+
+          - if current_user.present?
+            li
+              - if current_user.is_admin?
+                a href="/admin" Manage
+
+              - else
+                a href="/manage" Manage
+
+            li
+              form action="/logout" method="POST" class="invisible-form"
+                input type="submit" class="link-button" value="Log Out"
+
+
+    main#main
+      - if flash.present?
+        ul.messages
+          - flash.each do |msg_type, msg|
+            li class="#{msg_type}" #{msg}
+      == yield

@@ -1,0 +1,40 @@
+h2 Join
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = devise_error_messages!
+
+  .form-row
+    = f.label :email
+    = f.email_field :email, autofocus: true
+
+  .form-row
+    = f.label :display_name
+    = f.text_field :display_name
+
+  .form-row
+    = f.label :site_name
+    = f.text_field :site_name
+
+  .form-row
+    = f.label :site_url
+    = f.url_field :site_url
+
+  .form-row
+    = f.label :site_description
+    = f.text_area :site_description
+
+  .form-row
+    = f.label :password
+    - if @minimum_password_length
+      em
+        = "(#{@minimum_password_length} characters minimum)"
+    = f.password_field :password, autocomplete: "off"
+
+  .form-row
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, autocomplete: "off"
+
+  .form-row
+    = f.submit "Submit Application"
+
+= render "devise/shared/links"

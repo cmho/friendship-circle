@@ -1,0 +1,46 @@
+doctype html
+html
+  head
+    title Friendship Circle
+    = csrf_meta_tags
+
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+
+  body
+  header#header
+    h1
+      a href="/" #{Setting.ring_name}
+    nav#navigation
+      ul
+        li
+          = link_to "Home", root_path
+        li
+          = link_to "List", list_path
+        li
+          = link_to "Rules", rules_path
+        - if current_user.nil?
+          li
+            = link_to "Join", new_user_registration_path
+          li
+            = link_to "Log In", new_user_session_path
+
+        - if current_user.present?
+          li
+            - if current_user.is_admin?
+              a href="/admin" Manage
+
+            - else
+              a href="/manage" Manage
+
+          li
+            form action="/logout" method="POST" class="invisible-form"
+              input type="submit" class="link-button" value="Log Out"
+
+
+  main#main
+    - if flash.present?
+      ul.messages
+        - flash.each do |msg_type, msg|
+          li class="#{msg_type}" #{msg}
+    = yield
