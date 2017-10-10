@@ -100,7 +100,7 @@
  }
 
  main#main {
-   max-width: 768px;
+   max-width: 960px;
    padding: 0 20px;
    margin: 50px auto;
  }
@@ -128,7 +128,7 @@
      }
 
      h3 {
-       margin: 0;
+       margin: 0 0 0.75em 0;
      }
 
      .description {
@@ -225,5 +225,28 @@
 
    &.center {
      justify-content: center;
+   }
+ }
+
+ nav.site-links {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin: 50px 0;
+
+   a {
+     font-weight: bold;
+
+     &.prev-link {
+       &:before {
+         content: "\00ab \0020";
+       }
+     }
+
+     &.next-link {
+       &:after {
+         content: "\0020 \00BB";
+       }
+     }
    }
  }

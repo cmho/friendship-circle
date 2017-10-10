@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   def next
     next_user = User.where('id > ?', self.id).order(id: :desc).where(is_active: true).first
-    if next_user.empty?
+    if next_user.nil?
       next_user = User.where(is_active: true).order(id: :desc).first
     end
 
@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   def prev
     prev_user = User.where('id < ?', self.id).order(id: :desc).where(is_active: true).last
-    if prev_user.empty?
+    if prev_user.nil?
       prev_user = User.where(is_active: true).order('id desc').last
     end
 

@@ -7,8 +7,10 @@
     = " #{@site.display_name}"
 
   .description
-    = site.site_description
+    = @site.site_description
 
   nav.site-links
-    a class="prev-link" href="/sites/#{@site.prev.id}" Prev: #{@site.prev.site_name}
-    a class="next-link" href="/sites/#{@site.next.id}" Next: #{@site.next.site_name}
+    - if @site.prev.present?
+      = link_to "Prev: #{@site.prev.site_name}", sites_path(@site.prev.id), class: 'prev-link'
+    - if @site.next.present?
+      = link_to "Next: #{@site.next.site_name}", sites_path(@site.next.id), class: 'next-link'
