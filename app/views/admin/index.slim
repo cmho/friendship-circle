@@ -14,12 +14,15 @@ h2 Administration
           = " #{site.site_url}"
 
         p
-          strong Code Detected:
+          strong Ownership Verified:
+          = " #{site.get_verification ? 'Yes' : 'No'}"
 
+        p
+          strong Code Detected:
 
         p
           strong Site Description:
-          
+
         .description
           = site.site_description
 
@@ -27,7 +30,7 @@ h2 Administration
           ul
             li
               a href="/admin/sites/#{site.id}/edit" Edit
-            - unless site.is_approved?
+            - unless site.is_active?
               li
                 a href="#" class="approve-link" Approve
             - else

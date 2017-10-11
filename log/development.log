@@ -1690,3 +1690,293 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 54ms (Views: 46.8ms | ActiveRecord: 2.6ms)
 
 
+Started GET "/" for 127.0.0.1 at 2017-10-10 20:35:31 -0500
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  [1m[36mSetting Load (2.0ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.7ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_description"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered home/index.slim within layouts/application (55.2ms)
+  [1m[36mSetting Load (0.9ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 668ms (Views: 591.8ms | ActiveRecord: 20.5ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:35:35 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/admin"):
+  
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+thin (1.7.2) lib/thin/connection.rb:86:in `block in pre_process'
+thin (1.7.2) lib/thin/connection.rb:84:in `catch'
+thin (1.7.2) lib/thin/connection.rb:84:in `pre_process'
+thin (1.7.2) lib/thin/connection.rb:53:in `process'
+thin (1.7.2) lib/thin/connection.rb:39:in `receive_data'
+eventmachine (1.2.5) lib/eventmachine.rb:194:in `run_machine'
+eventmachine (1.2.5) lib/eventmachine.rb:194:in `run'
+thin (1.7.2) lib/thin/backends/base.rb:73:in `start'
+thin (1.7.2) lib/thin/server.rb:162:in `start'
+thin (1.7.2) lib/thin/controllers/controller.rb:87:in `start'
+thin (1.7.2) lib/thin/runner.rb:203:in `run_command'
+thin (1.7.2) lib/thin/runner.rb:159:in `run!'
+thin (1.7.2) bin/thin:6:in `<top (required)>'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/thin:22:in `load'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/thin:22:in `<main>'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/ruby_executable_hooks:15:in `eval'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/ruby_executable_hooks:15:in `<main>'
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:35:53 -0500
+  
+AbstractController::ActionNotFound (The action 'new' could not be found for AdminController):
+  
+actionpack (5.1.4) lib/abstract_controller/base.rb:119:in `process'
+actionview (5.1.4) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.1.4) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.4) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.4) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.4) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.4) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.4) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.4) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.4) lib/action_dispatch/routing/route_set.rb:834:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.3) lib/rack/etag.rb:25:in `call'
+rack (2.0.3) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.3) lib/rack/head.rb:12:in `call'
+rack (2.0.3) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.3) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.4) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.4) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.4) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+thin (1.7.2) lib/thin/connection.rb:86:in `block in pre_process'
+thin (1.7.2) lib/thin/connection.rb:84:in `catch'
+thin (1.7.2) lib/thin/connection.rb:84:in `pre_process'
+thin (1.7.2) lib/thin/connection.rb:53:in `process'
+thin (1.7.2) lib/thin/connection.rb:39:in `receive_data'
+eventmachine (1.2.5) lib/eventmachine.rb:194:in `run_machine'
+eventmachine (1.2.5) lib/eventmachine.rb:194:in `run'
+thin (1.7.2) lib/thin/backends/base.rb:73:in `start'
+thin (1.7.2) lib/thin/server.rb:162:in `start'
+thin (1.7.2) lib/thin/controllers/controller.rb:87:in `start'
+thin (1.7.2) lib/thin/runner.rb:203:in `run_command'
+thin (1.7.2) lib/thin/runner.rb:159:in `run!'
+thin (1.7.2) bin/thin:6:in `<top (required)>'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/thin:22:in `load'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/thin:22:in `<main>'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/ruby_executable_hooks:15:in `eval'
+/Users/Carly/.rvm/gems/ruby-2.4.0/bin/ruby_executable_hooks:15:in `<main>'
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:36:00 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (2570.7ms)
+Completed 500 Internal Server Error in 2644ms (ActiveRecord: 14.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `is_approved?' for #<User:0x007fa790237640>
+Did you mean?  is_active?):
+    30:           ul
+    31:             li
+    32:               a href="/admin/sites/#{site.id}/edit" Edit
+    33:             - unless site.is_approved?
+    34:               li
+    35:                 a href="#" class="approve-link" Approve
+    36:             - else
+  
+app/views/admin/index.slim:33:in `block in _app_views_admin_index_slim__156315829604587081_70178809525380'
+app/views/admin/index.slim:5:in `_app_views_admin_index_slim__156315829604587081_70178809525380'
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:36:17 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (978.3ms)
+Completed 200 OK in 1108ms (Views: 1097.8ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:37:20 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (2.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (183.6ms)
+Completed 200 OK in 287ms (Views: 275.6ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:37:36 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.5ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (167.1ms)
+Completed 200 OK in 241ms (Views: 193.5ms | ActiveRecord: 13.8ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:38:00 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.5ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (181.0ms)
+Completed 200 OK in 264ms (Views: 210.3ms | ActiveRecord: 15.7ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:38:35 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (164.7ms)
+Completed 200 OK in 258ms (Views: 194.9ms | ActiveRecord: 11.9ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:38:53 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.7ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (167.6ms)
+Completed 200 OK in 258ms (Views: 201.0ms | ActiveRecord: 14.5ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:39:23 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (185.7ms)
+Completed 500 Internal Server Error in 241ms (ActiveRecord: 14.8ms)
+
+
+  
+ActionView::Template::Error (wrong number of arguments (given 1, expected 0)):
+    15: 
+    16:         p
+    17:           strong Ownership Verified:
+    18:           = " #{site.get_verification ? 'Yes' : 'No'}"
+    19: 
+    20:         p
+    21:           strong Code Detected:
+  
+app/models/user.rb:34:in `get_verification'
+app/views/admin/index.slim:18:in `block in _app_views_admin_index_slim__156315829604587081_70178769387740'
+app/views/admin/index.slim:5:in `_app_views_admin_index_slim__156315829604587081_70178769387740'
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:40:54 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (1.1ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (184.9ms)
+Completed 200 OK in 273ms (Views: 227.6ms | ActiveRecord: 12.8ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:41:05 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.5ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (178.6ms)
+Completed 200 OK in 254ms (Views: 207.5ms | ActiveRecord: 12.7ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:41:21 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.9ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (174.1ms)
+Completed 200 OK in 266ms (Views: 217.6ms | ActiveRecord: 15.4ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:41:49 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (1.1ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (889.2ms)
+Completed 200 OK in 1020ms (Views: 940.2ms | ActiveRecord: 17.8ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2017-10-10 20:42:09 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.7ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.5ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/index.slim within layouts/application (290.9ms)
+Completed 200 OK in 373ms (Views: 324.6ms | ActiveRecord: 10.9ms)
+
+
