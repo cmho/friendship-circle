@@ -2,6 +2,7 @@
 defaults: &defaults
   ring_name: "Friendship Circle"
   ring_description: "Default description goes here."
+  ring_rules: ""
 
 development:
   <<: *defaults

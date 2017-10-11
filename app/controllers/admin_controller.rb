@@ -12,7 +12,11 @@ class AdminController < ApplicationController
   end
 
   def update_settings
-
+    Setting.ring_name = params[:ring_name]
+    Setting.ring_description = params[:ring_description]
+    Setting.ring_rules = params[:ring_rules]
+    Setting.high_security = params[:high_security]
+    redirect_to admin_settings_path
   end
 
   def edit
