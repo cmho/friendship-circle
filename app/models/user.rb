@@ -30,7 +30,8 @@ class User < ApplicationRecord
 
   def get_verification
     site_content = Nokogiri::HTML(HTTParty.get(self.site_url))
-    if site_content.xpath("//meta[@name='#{Setting.ring_name.downcase.parameterize}_verif']").length > 0
+    verification = site_content.xpath("//meta[@name='#{Setting.ring_name.downcase.parameterize}_verif']")
+    if verification.length > 0 and verification.attr('content').text == self.id
       return true
     end
 
