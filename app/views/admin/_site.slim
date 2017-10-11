@@ -1,0 +1,33 @@
+li[class="#{classname}"]
+  h3 #{site.site_name}
+  p
+    strong User:
+    = " #{site.display_name}"
+
+  p
+    strong Site Address:
+    = link_to " #{site.site_url}", site.site_url, rel: 'external', target: '_blank'
+
+  p
+    strong Ownership Verified:
+    = " #{site.get_verification ? 'Yes' : 'No'}"
+
+  p
+    strong Code Detected:
+
+  p
+    strong Site Description:
+
+  .description
+    = site.site_description
+
+  nav.admin-links
+    ul
+      li
+        = link_to "Edit", admin_edit_path(site)
+      - unless site.is_active?
+        li
+          = link_to "Approve", "#", class: 'approve-link'
+      - else
+        li
+          = link_to "Set Inactive", "#", class: "active-link"

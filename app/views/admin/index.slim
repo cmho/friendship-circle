@@ -1,38 +1,19 @@
 h2 Administration
 
+- if @new_sites.present?
+  h2 Pending Approval
+  ul#admin-list
+    - @new_sites.each do |site|
+      = render partial: 'site', locals: {site: site, classname: 'new'}
+
+- if @sites_needing_review.present?
+  h2 Need Review
+  ul#admin-list
+    - @sites_needing_review.each do |site|
+      = render partial: 'site', locals: {site: site, classname: 'needs-review'}
+
 - if @sites.present?
+  h2 All Sites
   ul#admin-list
     - @sites.each do |site|
-      li
-        h3 #{site.site_name}
-        p
-          strong User:
-          = " #{site.display_name}"
-
-        p
-          strong Site Address:
-          = " #{site.site_url}"
-
-        p
-          strong Ownership Verified:
-          = " #{site.get_verification ? 'Yes' : 'No'}"
-
-        p
-          strong Code Detected:
-
-        p
-          strong Site Description:
-
-        .description
-          = site.site_description
-
-        nav.admin-links
-          ul
-            li
-              a href="/admin/sites/#{site.id}/edit" Edit
-            - unless site.is_active?
-              li
-                a href="#" class="approve-link" Approve
-            - else
-              li
-                a href="#" class="active-link" Set Inactive
+      = render partial: 'site', locals: {site: site, classname: site.needs_review? ? 'needs-review' : (site.is_new? ? 'new' : '')}

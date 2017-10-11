@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'sites/:id', to: 'sites#show', as: 'sites'
 
   get 'admin', to: 'admin#index', as: 'admin'
+  get 'admin/site/:id', to: 'admin#edit', as: 'admin_edit'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

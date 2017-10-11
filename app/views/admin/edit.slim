@@ -1,0 +1,15 @@
+h2 Editing Site: #{@site.site_name}
+
+= form_for @site, url: {action: 'update'} do |f|
+
+  .form-row
+    = f.label :site_name
+    = f.text_field :site_name
+
+  .form-row
+    = f.label :site_url
+    = f.url_field :site_url
+
+  .form-row
+    = f.label :site_description
+    = f.text_area :site_description

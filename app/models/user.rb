@@ -37,4 +37,20 @@ class User < ApplicationRecord
 
     return false
   end
+
+  def is_new?
+    if self.last_reviewed.nil?
+      return true
+    end
+
+    return false
+  end
+
+  def needs_review?
+    if self.last_reviewed.present? and self.last_reviewed < self.updated_at
+      return true
+    end
+
+    return false
+  end
 end
