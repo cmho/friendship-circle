@@ -23,4 +23,17 @@ class User < ApplicationRecord
 
     prev_user
   end
+
+  def code_installed
+    # page should contain a link to the ring, the next link, and the prev link
+  end
+
+  def get_verification
+    site_content = Nokogiri::HTML(HTTParty.get(self.site_url))
+    if site_content.xpath("//meta[@name='#{Setting.ring_name.downcase.parameterize}_verif']").length > 0
+      return true
+    end
+
+    return false
+  end
 end
