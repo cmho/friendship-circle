@@ -24,11 +24,38 @@ class AdminController < ApplicationController
   end
 
   def update
+    @site = User.find(params[:id])
+    if @site.update_attributes(site_params)
 
+    else
+
+    end
+  end
+
+  def approve
+    @site = User.find(params[:id])
+    @site.last_reviewed = DateTime.now
+    if @site.save!
+      return true
+    end
+
+    return false
+  end
+
+  def deactivate
+    @site = User.find(params[:id])
+    @site.last_reviewed = DateTime.now
+    @site.is_active = false
+    if @site.save!
+      return true
+    end
+
+    return false
   end
 
   def destroy
-
+    @site = User.destroy(params[:id])
+    redirect_to admin_path
   end
 
   protected
@@ -37,5 +64,15 @@ class AdminController < ApplicationController
     unless current_user.is_admin?
       redirect_to root_path
     end
+  end
+
+  private
+
+  def site_params
+    params.require(:site).permit(:site_name, :site_url, :site_description)
+  end
+
+  def user_params
+    params.require(:user).permit(:display_name, :email, :password)
   end
 end
