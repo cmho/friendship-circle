@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015174900) do
+ActiveRecord::Schema.define(version: 20171010025841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20171015174900) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", null: false
+    t.string "email", default: "", null: false
     t.string "display_name", null: false
     t.string "site_name", null: false
     t.string "site_url", null: false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20171015174900) do
     t.boolean "is_active", default: false
     t.boolean "is_admin", default: false
     t.datetime "last_reviewed"
+    t.datetime "user_last_updated", default: -> { "now()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
@@ -48,7 +49,6 @@ ActiveRecord::Schema.define(version: 20171015174900) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.datetime "user_last_updated"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
