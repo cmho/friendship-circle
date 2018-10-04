@@ -1,0 +1,24 @@
+h2 Site Settings
+
+= form_tag 'update_settings', method: 'POST'
+
+  .form-row
+    = label_tag "Site Name", for: :ring_name
+    = text_field_tag :ring_name, Setting.ring_name
+
+  .form-row
+    = label_tag "Site Description", for: :ring_description
+    = text_area_tag :ring_description, Setting.ring_description
+
+  .form-row
+    = label_tag "Site Rules", for: :ring_rules
+    em A list of membership rules that will appear on the Rules page.
+    = text_area_tag :ring_rules, Setting.ring_rules
+
+  .form-row
+    = label_tag "Use higher security?", for: :high_security
+    em When checked, when members update their site information, their site will be marked inactive until it's reviewed. Requires higher admin maintenance.
+    = check_box_tag :high_security, Setting.high_security
+
+  .form-row
+    = submit_tag "Save"

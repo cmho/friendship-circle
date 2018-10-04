@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.boolean :is_active, default: false
       t.boolean :is_admin, default: false
       t.datetime :last_reviewed
+      t.datetime :user_last_updated, default: -> { 'CURRENT_TIMESTAMP' }
       t.timestamps
     end
   end

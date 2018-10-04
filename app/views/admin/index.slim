@@ -1,35 +1,57 @@
 h2 Administration
 
+- if @new_sites.present?
+  h2 Pending Approval
+  ul#admin-list
+    - @new_sites.each do |site|
+      = render partial: 'site', locals: {site: site, classname: 'new'}
+
+- if @sites_needing_review.present?
+  h2 Need Review
+  ul#admin-list
+    - @sites_needing_review.each do |site|
+      = render partial: 'site', locals: {site: site, classname: 'needs-review'}
+
 - if @sites.present?
+  h2 All Sites
   ul#admin-list
     - @sites.each do |site|
-      li
-        h3 #{site.site_name}
-        p
-          strong User:
-          = " #{site.display_name}"
+      = render partial: 'site', locals: {site: site, classname: site.needs_review? ? 'needs-review' : (site.is_new? ? 'new' : '')}
 
-        p
-          strong Site Address:
-          = " #{site.site_url}"
+javascript:
+  $('body').on('click', '.approve-link', function(e) {
+    e.preventDefault();
+    var link = $(this);
+    $.ajax({
+      url: "#{admin_approve_path}",
+      method: 'POST',
+      data: {
+        site: $(this).data('site'),
+        authenticity_token: "#{form_authenticity_token}"
+      },
+      success: function(data) {
+        link.parents('li').parents('li').removeClass('needs-review').removeClass('new');
+        link.html('Set Inactive');
+        link.removeClass('active-link').addClass('approve-link');
+      }
+    });
+  });
 
-        p
-          strong Code Detected:
-
-
-        p
-          strong Site Description:
-          
-        .description
-          = site.site_description
-
-        nav.admin-links
-          ul
-            li
-              a href="/admin/sites/#{site.id}/edit" Edit
-            - unless site.is_approved?
-              li
-                a href="#" class="approve-link" Approve
-            - else
-              li
-                a href="#" class="active-link" Set Inactive
+  $('body').on('click', '.active-link', function(e) {
+    e.preventDefault();
+    var link = $(this);
+    $.ajax({
+      url: "#{admin_set_inactive_path}",
+      method: 'POST',
+      data: {
+        site: $(this).data('site'),
+        authenticity_token: "#{form_authenticity_token}"
+      },
+      success: function(data) {
+        console.log('hello world');
+        link.parents('li').parents('li').addClass('needs-review');
+        link.html('Approve');
+        link.removeClass('approve-link').addClass('active-link');
+      }
+    });
+  });
