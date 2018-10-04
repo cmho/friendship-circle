@@ -39,6 +39,7 @@ gem 'httparty'
 gem 'redcarpet'
 gem 'rails-settings-cached'
 gem 'auto_excerpt'
+gem 'highline'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
