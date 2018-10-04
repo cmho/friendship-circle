@@ -26,15 +26,18 @@ class AdminController < ApplicationController
   def update
     @site = User.find(params[:id])
     if @site.update_attributes(site_params)
-
+      flash[:success] = "Site \"#{@site.site_name}\" updated successfully."
+      redirect_to admin_path and return
     else
-
+      flash[:error] = "There was an error updating the site \"#{@site.site_name}.\""
+      redirect_to admin_edit_path(@site) and return
     end
   end
 
   def approve
-    @site = User.find(params[:id])
+    @site = User.find(params[:site])
     @site.last_reviewed = DateTime.now
+    @site.is_active = true
     if @site.save!
       return true
     end
@@ -42,8 +45,8 @@ class AdminController < ApplicationController
     return false
   end
 
-  def deactivate
-    @site = User.find(params[:id])
+  def set_inactive
+    @site = User.find(params[:site])
     @site.last_reviewed = DateTime.now
     @site.is_active = false
     if @site.save!
@@ -55,6 +58,7 @@ class AdminController < ApplicationController
 
   def destroy
     @site = User.destroy(params[:id])
+    flash[:success] = "Site \"#{@site.site_name}\" has been removed."
     redirect_to admin_path
   end
 
@@ -69,7 +73,7 @@ class AdminController < ApplicationController
   private
 
   def site_params
-    params.require(:site).permit(:site_name, :site_url, :site_description)
+    params.require(:user).permit(:site_name, :site_url, :site_description, :is_active)
   end
 
   def user_params

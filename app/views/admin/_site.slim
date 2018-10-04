@@ -27,7 +27,7 @@ li[class="#{classname}"]
         = link_to "Edit", admin_edit_path(site)
       - unless site.is_active?
         li
-          = link_to "Approve", "#", class: 'approve-link'
+          = link_to "Approve", "#", class: 'approve-link', 'data-site': site.id
       - else
         li
-          = link_to "Set Inactive", "#", class: "active-link"
+          = link_to "Set Inactive", "#", class: "active-link", 'data-site': site.id

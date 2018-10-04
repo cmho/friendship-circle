@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates_presence_of :email, :display_name, :site_name, :site_url, :site_description, :password
+  validates_presence_of :email, :display_name, :site_name, :site_url, :site_description
   validates_uniqueness_of :email
 
   def next
@@ -47,7 +47,7 @@ class User < ApplicationRecord
   end
 
   def needs_review?
-    if self.last_reviewed.present? and self.last_reviewed < self.updated_at
+    if self.last_reviewed.present? and self.last_reviewed < self.user_last_updated
       return true
     end
 

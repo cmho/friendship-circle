@@ -1,6 +1,6 @@
 h2 Editing Site: #{@site.site_name}
 
-= form_for @site, url: {action: 'update'} do |f|
+= form_for @site, url: admin_update_path, method: 'POST' do |f|
 
   .form-row
     = f.label :site_name
@@ -13,3 +13,10 @@ h2 Editing Site: #{@site.site_name}
   .form-row
     = f.label :site_description
     = f.text_area :site_description
+
+  .form-row
+    = f.label :is_active
+    = f.check_box :is_active
+
+  .form-row
+    = f.submit "Save"

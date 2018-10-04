@@ -17,3 +17,41 @@ h2 Administration
   ul#admin-list
     - @sites.each do |site|
       = render partial: 'site', locals: {site: site, classname: site.needs_review? ? 'needs-review' : (site.is_new? ? 'new' : '')}
+
+javascript:
+  $('body').on('click', '.approve-link', function(e) {
+    e.preventDefault();
+    var link = $(this);
+    $.ajax({
+      url: "#{admin_approve_path}",
+      method: 'POST',
+      data: {
+        site: $(this).data('site'),
+        authenticity_token: "#{form_authenticity_token}"
+      },
+      success: function(data) {
+        link.parents('li').parents('li').removeClass('needs-review').removeClass('new');
+        link.html('Set Inactive');
+        link.removeClass('active-link').addClass('approve-link');
+      }
+    });
+  });
+
+  $('body').on('click', '.active-link', function(e) {
+    e.preventDefault();
+    var link = $(this);
+    $.ajax({
+      url: "#{admin_set_inactive_path}",
+      method: 'POST',
+      data: {
+        site: $(this).data('site'),
+        authenticity_token: "#{form_authenticity_token}"
+      },
+      success: function(data) {
+        console.log('hello world');
+        link.parents('li').parents('li').addClass('needs-review');
+        link.html('Approve');
+        link.removeClass('approve-link').addClass('active-link');
+      }
+    });
+  });
