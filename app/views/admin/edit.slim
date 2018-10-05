@@ -15,6 +15,10 @@ h2 Editing Site: #{@site.site_name}
     = f.text_area :site_description
 
   .form-row
+    = f.label :screenshot
+    = f.file_field :screenshot
+
+  .form-row
     = f.label :is_active
     = f.check_box :is_active
 
