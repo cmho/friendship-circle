@@ -73,7 +73,7 @@ class AdminController < ApplicationController
   private
 
   def site_params
-    params.require(:user).permit(:site_name, :site_url, :site_description, :is_active)
+    params.require(:user).permit(:site_name, :site_url, :site_description, :is_active, :screenshot)
   end
 
   def user_params

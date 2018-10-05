@@ -5410,3 +5410,276 @@ Migrating to CreateActiveStorageTables (20181005155056)
   [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4009284207309526005)[0m
   [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2018-10-05 10:52:53 -0500
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+DEPRECATION WARNING: Dangerous query method (method whose arguments are used as raw SQL) called with non-attribute argument(s): "RANDOM()". Non-attribute arguments will be disallowed in Rails 6.0. This method should not be called with user-provided values, such as request parameters or model attributes. Known-safe values can be passed by wrapping them in Arel.sql(). (called from index at /Users/cho/Documents/github/friendship-circle/app/controllers/home_controller.rb:3)
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  [1m[36mSetting Load (1.9ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (1.3ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_description"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered home/index.slim within layouts/application (51.1ms)
+  [1m[36mSetting Load (0.7ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 632ms (Views: 571.6ms | ActiveRecord: 19.9ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2018-10-05 10:53:01 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."last_reviewed" IS NULL[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (last_reviewed != null AND updated_at > last_reviewed) ORDER BY "users"."id" ASC[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (1.0ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/_site.slim (704.3ms)
+  Rendered admin/index.slim within layouts/application (716.8ms)
+Completed 200 OK in 763ms (Views: 744.5ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/admin/site/1" for 127.0.0.1 at 2018-10-05 10:53:03 -0500
+Processing by AdminController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/edit.slim within layouts/application
+  Rendered admin/edit.slim within layouts/application (247.7ms)
+Completed 500 Internal Server Error in 298ms (ActiveRecord: 8.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `file' for #<ActionView::Helpers::FormBuilder:0x00007fad756d2c78>
+Did you mean?  fields):
+    16: 
+    17:   .form-row
+    18:     = f.label :screenshot
+    19:     = f.file :screenshot
+    20: 
+    21:   .form-row
+    22:     = f.label :is_active
+  
+app/views/admin/edit.slim:19:in `block in _app_views_admin_edit_slim__2003027951092041982_70191487322260'
+app/views/admin/edit.slim:3:in `_app_views_admin_edit_slim__2003027951092041982_70191487322260'
+Started GET "/admin/site/1" for 127.0.0.1 at 2018-10-05 10:53:43 -0500
+Processing by AdminController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/edit.slim within layouts/application
+  Rendered admin/edit.slim within layouts/application (13.1ms)
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 65ms (Views: 54.5ms | ActiveRecord: 2.7ms)
+
+
+Started POST "/admin/site/1" for 127.0.0.1 at 2018-10-05 10:54:30 -0500
+Processing by AdminController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Y8PbJu2CV14Yu4vENUKOg+DkmAwo8KN4LvNWpAX0CbXY1KdzAzf7uKpG8e4rEX5HQ/XclRG37DklycQbe90Gxw==", "user"=>{"site_name"=>"Carly M. Ho", "site_url"=>"https://carlymho.com/", "site_description"=>"personal portfolio", "screenshot"=>#<ActionDispatch::Http::UploadedFile:0x00007fad775fee58 @tempfile=#<Tempfile:/var/folders/jw/1p0z4j4n2y9_ps3hc177v3y00000gn/T/RackMultipart20181005-45912-144qgne.jpg>, @original_filename="d76cc2e12c2c5159fea1891623820a3d.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"user[screenshot]\"; filename=\"d76cc2e12c2c5159fea1891623820a3d.jpg\"\r\nContent-Type: image/jpeg\r\n">, "is_active"=>"1"}, "commit"=>"Save", "id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Unpermitted parameter: :screenshot
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "carlymho@fastmail.com"], ["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/admin
+Completed 302 Found in 8ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2018-10-05 10:54:30 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."last_reviewed" IS NULL[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (last_reviewed != null AND updated_at > last_reviewed) ORDER BY "users"."id" ASC[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/_site.slim (518.7ms)
+  Rendered admin/index.slim within layouts/application (532.0ms)
+Completed 200 OK in 574ms (Views: 566.9ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2018-10-05 10:55:55 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."last_reviewed" IS NULL[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (last_reviewed != null AND updated_at > last_reviewed) ORDER BY "users"."id" ASC[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  Rendered admin/_site.slim (23.7ms)
+  Rendered admin/index.slim within layouts/application (47.9ms)
+Completed 500 Internal Server Error in 61ms (ActiveRecord: 2.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `screemshot' for #<User:0x00007fad72667480>
+Did you mean?  screenshot
+               screenshot=):
+    1: li[class="#{classname}"]
+    2:   .image
+    3:     = image_tag url_for(site.screemshot)
+    4:     
+    5:   h3 #{site.site_name}
+    6:   p
+  
+app/views/admin/_site.slim:3:in `_app_views_admin__site_slim___1793223362214774265_70191462687120'
+app/views/admin/index.slim:19:in `block in _app_views_admin_index_slim___3560963100394368880_70191486026420'
+app/views/admin/index.slim:18:in `_app_views_admin_index_slim___3560963100394368880_70191486026420'
+Started GET "/admin" for 127.0.0.1 at 2018-10-05 10:56:02 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."last_reviewed" IS NULL[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (last_reviewed != null AND updated_at > last_reviewed) ORDER BY "users"."id" ASC[0m
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mActiveStorage::Attachment Load (9.7ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "screenshot"], ["LIMIT", 1]]
+  Rendered admin/_site.slim (67.1ms)
+  Rendered admin/index.slim within layouts/application (92.6ms)
+Completed 500 Internal Server Error in 108ms (ActiveRecord: 19.5ms)
+
+
+  
+ActionView::Template::Error (to_model delegated to attachment, but attachment is nil):
+    1: li[class="#{classname}"]
+    2:   .image
+    3:     = image_tag url_for(site.screenshot)
+    4: 
+    5:   h3 #{site.site_name}
+    6:   p
+  
+app/views/admin/_site.slim:3:in `_app_views_admin__site_slim___1793223362214774265_70191502036660'
+app/views/admin/index.slim:19:in `block in _app_views_admin_index_slim___3560963100394368880_70191507969060'
+app/views/admin/index.slim:18:in `_app_views_admin_index_slim___3560963100394368880_70191507969060'
+Started GET "/admin/site/1" for 127.0.0.1 at 2018-10-05 10:57:29 -0500
+Processing by AdminController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/edit.slim within layouts/application
+  Rendered admin/edit.slim within layouts/application (7.6ms)
+  [1m[36mSetting Load (0.4ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "namespace"], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.4ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 106ms (Views: 55.8ms | ActiveRecord: 11.1ms)
+
+
+Started POST "/admin/site/1" for 127.0.0.1 at 2018-10-05 10:57:59 -0500
+Processing by AdminController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LMnqxw0WF1OofnVn3t0R/n78zyXWzAd+/sJePNVniJSX3paS46O7tRqDD03AjuE63e2LvO+LSD/1+MyDq06H5g==", "user"=>{"site_name"=>"Carly M. Ho", "site_url"=>"https://carlymho.com/", "site_description"=>"personal portfolio", "screenshot"=>#<ActionDispatch::Http::UploadedFile:0x00007fad77ebfdd0 @tempfile=#<Tempfile:/var/folders/jw/1p0z4j4n2y9_ps3hc177v3y00000gn/T/RackMultipart20181005-45912-1o8o4oh.jpg>, @original_filename="da431cbd11883e7c15178137bd72374e.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"user[screenshot]\"; filename=\"da431cbd11883e7c15178137bd72374e.jpg\"\r\nContent-Type: image/jpeg\r\n">, "is_active"=>"1"}, "commit"=>"Save", "id"=>"1"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "screenshot"], ["LIMIT", 1]]
+[36m  Disk Storage (2.4ms) [0m[32mUploaded file to key: W3Sn9guWpG2xmSYu8FWFRYQh (checksum: v4kVXWuxWUII85x5/D3PgA==)[0m
+  [1m[36mActiveStorage::Blob Create (1.4ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["key", "W3Sn9guWpG2xmSYu8FWFRYQh"], ["filename", "da431cbd11883e7c15178137bd72374e.jpg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["byte_size", 45014], ["checksum", "v4kVXWuxWUII85x5/D3PgA=="], ["created_at", "2018-10-05 15:57:59.336095"]]
+  [1m[36mActiveStorage::Attachment Create (0.6ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "screenshot"], ["record_type", "User"], ["record_id", 1], ["blob_id", 1], ["created_at", "2018-10-05 15:57:59.351854"]]
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "carlymho@fastmail.com"], ["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Update (1.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = $1 WHERE "users"."id" = $2[0m  [["updated_at", "2018-10-05 15:57:59.353417"], ["id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: bdece416-eaeb-4a3d-b9d8-f68bc382acb1) to Async(default) with arguments: #<GlobalID:0x00007fad77908cc0 @uri=#<URI::GID gid://friendship-circle/ActiveStorage::Blob/1>>
+Redirected to http://localhost:3000/admin
+Completed 302 Found in 169ms (ActiveRecord: 18.9ms)
+
+
+  [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [bdece416-eaeb-4a3d-b9d8-f68bc382acb1] Performing ActiveStorage::AnalyzeJob (Job ID: bdece416-eaeb-4a3d-b9d8-f68bc382acb1) from Async(default) with arguments: #<GlobalID:0x00007fad778b8a68 @uri=#<URI::GID gid://friendship-circle/ActiveStorage::Blob/1>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [bdece416-eaeb-4a3d-b9d8-f68bc382acb1] [36m  Disk Storage (0.3ms) [0m[34mDownloaded file from key: W3Sn9guWpG2xmSYu8FWFRYQh[0m
+Started GET "/admin" for 127.0.0.1 at 2018-10-05 10:57:59 -0500
+[ActiveJob] [ActiveStorage::AnalyzeJob] [bdece416-eaeb-4a3d-b9d8-f68bc382acb1] Skipping image analysis because the mini_magick gem isn't installed
+[ActiveJob] [ActiveStorage::AnalyzeJob] [bdece416-eaeb-4a3d-b9d8-f68bc382acb1]   [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [bdece416-eaeb-4a3d-b9d8-f68bc382acb1]   [1m[36mActiveStorage::Blob Update (0.4ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [bdece416-eaeb-4a3d-b9d8-f68bc382acb1]   [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [bdece416-eaeb-4a3d-b9d8-f68bc382acb1] Performed ActiveStorage::AnalyzeJob (Job ID: bdece416-eaeb-4a3d-b9d8-f68bc382acb1) from Async(default) in 10.8ms
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."last_reviewed" IS NULL[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (last_reviewed != null AND updated_at > last_reviewed) ORDER BY "users"."id" ASC[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mActiveStorage::Attachment Load (1.0ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "screenshot"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mSetting Load (1.5ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/_site.slim (514.3ms)
+  Rendered admin/index.slim within layouts/application (526.3ms)
+Completed 200 OK in 599ms (Views: 585.9ms | ActiveRecord: 8.3ms)
+
+
+Started GET "/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4d0c55ede9b8280c254827ed03b3c451002946c3/da431cbd11883e7c15178137bd72374e.jpg" for 127.0.0.1 at 2018-10-05 10:58:00 -0500
+Processing by ActiveStorage::BlobsController#show as JPEG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4d0c55ede9b8280c254827ed03b3c451002946c3", "filename"=>"da431cbd11883e7c15178137bd72374e"}
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[36m  Disk Storage (3.2ms) [0m[34mGenerated URL for file at key: W3Sn9guWpG2xmSYu8FWFRYQh (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaDFYTTFOdU9XZDFWM0JITW5odFUxbDFPRVpYUmxKWlVXZ0dPZ1pGVkE9PSIsImV4cCI6IjIwMTgtMTAtMDVUMTY6MDM6MDAuMTMxWiIsInB1ciI6ImJsb2Jfa2V5In19--ad9ea54705f795f01f6c576f63fb05234fe2ecc3/da431cbd11883e7c15178137bd72374e.jpg?content_type=image%2Fjpeg&disposition=inline%3B+filename%3D%22da431cbd11883e7c15178137bd72374e.jpg%22%3B+filename%2A%3DUTF-8%27%27da431cbd11883e7c15178137bd72374e.jpg)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaDFYTTFOdU9XZDFWM0JITW5odFUxbDFPRVpYUmxKWlVXZ0dPZ1pGVkE9PSIsImV4cCI6IjIwMTgtMTAtMDVUMTY6MDM6MDAuMTMxWiIsInB1ciI6ImJsb2Jfa2V5In19--ad9ea54705f795f01f6c576f63fb05234fe2ecc3/da431cbd11883e7c15178137bd72374e.jpg?content_type=image%2Fjpeg&disposition=inline%3B+filename%3D%22da431cbd11883e7c15178137bd72374e.jpg%22%3B+filename%2A%3DUTF-8%27%27da431cbd11883e7c15178137bd72374e.jpg
+Completed 302 Found in 10ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaDFYTTFOdU9XZDFWM0JITW5odFUxbDFPRVpYUmxKWlVXZ0dPZ1pGVkE9PSIsImV4cCI6IjIwMTgtMTAtMDVUMTY6MDM6MDAuMTMxWiIsInB1ciI6ImJsb2Jfa2V5In19--ad9ea54705f795f01f6c576f63fb05234fe2ecc3/da431cbd11883e7c15178137bd72374e.jpg?content_type=image%2Fjpeg&disposition=inline%3B+filename%3D%22da431cbd11883e7c15178137bd72374e.jpg%22%3B+filename%2A%3DUTF-8%27%27da431cbd11883e7c15178137bd72374e.jpg" for 127.0.0.1 at 2018-10-05 10:58:00 -0500
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"content_type"=>"image/jpeg", "disposition"=>"inline; filename=\"da431cbd11883e7c15178137bd72374e.jpg\"; filename*=UTF-8''da431cbd11883e7c15178137bd72374e.jpg", "encoded_key"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaDFYTTFOdU9XZDFWM0JITW5odFUxbDFPRVpYUmxKWlVXZ0dPZ1pGVkE9PSIsImV4cCI6IjIwMTgtMTAtMDVUMTY6MDM6MDAuMTMxWiIsInB1ciI6ImJsb2Jfa2V5In19--ad9ea54705f795f01f6c576f63fb05234fe2ecc3", "filename"=>"da431cbd11883e7c15178137bd72374e"}
+[36m  Disk Storage (0.6ms) [0m[34mDownloaded file from key: W3Sn9guWpG2xmSYu8FWFRYQh[0m
+Completed 200 OK in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2018-10-05 10:59:42 -0500
+Processing by AdminController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering admin/index.slim within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."last_reviewed" IS NULL[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (last_reviewed != null AND updated_at > last_reviewed) ORDER BY "users"."id" ASC[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC[0m
+  [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "screenshot"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+  Rendered admin/_site.slim (528.6ms)
+  Rendered admin/index.slim within layouts/application (546.6ms)
+Completed 200 OK in 678ms (Views: 666.5ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4d0c55ede9b8280c254827ed03b3c451002946c3/da431cbd11883e7c15178137bd72374e.jpg" for 127.0.0.1 at 2018-10-05 10:59:43 -0500
+Processing by ActiveStorage::BlobsController#show as JPEG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4d0c55ede9b8280c254827ed03b3c451002946c3", "filename"=>"da431cbd11883e7c15178137bd72374e"}
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[36m  Disk Storage (0.7ms) [0m[34mGenerated URL for file at key: W3Sn9guWpG2xmSYu8FWFRYQh (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaDFYTTFOdU9XZDFWM0JITW5odFUxbDFPRVpYUmxKWlVXZ0dPZ1pGVkE9PSIsImV4cCI6IjIwMTgtMTAtMDVUMTY6MDQ6NDMuMzE0WiIsInB1ciI6ImJsb2Jfa2V5In19--d0026d4b538d716f8c31fac51b0bb5f8a8eb6f27/da431cbd11883e7c15178137bd72374e.jpg?content_type=image%2Fjpeg&disposition=inline%3B+filename%3D%22da431cbd11883e7c15178137bd72374e.jpg%22%3B+filename%2A%3DUTF-8%27%27da431cbd11883e7c15178137bd72374e.jpg)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaDFYTTFOdU9XZDFWM0JITW5odFUxbDFPRVpYUmxKWlVXZ0dPZ1pGVkE9PSIsImV4cCI6IjIwMTgtMTAtMDVUMTY6MDQ6NDMuMzE0WiIsInB1ciI6ImJsb2Jfa2V5In19--d0026d4b538d716f8c31fac51b0bb5f8a8eb6f27/da431cbd11883e7c15178137bd72374e.jpg?content_type=image%2Fjpeg&disposition=inline%3B+filename%3D%22da431cbd11883e7c15178137bd72374e.jpg%22%3B+filename%2A%3DUTF-8%27%27da431cbd11883e7c15178137bd72374e.jpg
+Completed 302 Found in 4ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaDFYTTFOdU9XZDFWM0JITW5odFUxbDFPRVpYUmxKWlVXZ0dPZ1pGVkE9PSIsImV4cCI6IjIwMTgtMTAtMDVUMTY6MDQ6NDMuMzE0WiIsInB1ciI6ImJsb2Jfa2V5In19--d0026d4b538d716f8c31fac51b0bb5f8a8eb6f27/da431cbd11883e7c15178137bd72374e.jpg?content_type=image%2Fjpeg&disposition=inline%3B+filename%3D%22da431cbd11883e7c15178137bd72374e.jpg%22%3B+filename%2A%3DUTF-8%27%27da431cbd11883e7c15178137bd72374e.jpg" for 127.0.0.1 at 2018-10-05 10:59:43 -0500
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"content_type"=>"image/jpeg", "disposition"=>"inline; filename=\"da431cbd11883e7c15178137bd72374e.jpg\"; filename*=UTF-8''da431cbd11883e7c15178137bd72374e.jpg", "encoded_key"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaDFYTTFOdU9XZDFWM0JITW5odFUxbDFPRVpYUmxKWlVXZ0dPZ1pGVkE9PSIsImV4cCI6IjIwMTgtMTAtMDVUMTY6MDQ6NDMuMzE0WiIsInB1ciI6ImJsb2Jfa2V5In19--d0026d4b538d716f8c31fac51b0bb5f8a8eb6f27", "filename"=>"da431cbd11883e7c15178137bd72374e"}
+[36m  Disk Storage (0.2ms) [0m[34mDownloaded file from key: W3Sn9guWpG2xmSYu8FWFRYQh[0m
+Completed 200 OK in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-10-05 11:01:00 -0500
+Processing by HomeController#index as HTML
+DEPRECATION WARNING: Dangerous query method (method whose arguments are used as raw SQL) called with non-attribute argument(s): "RANDOM()". Non-attribute arguments will be disallowed in Rails 6.0. This method should not be called with user-provided values, such as request parameters or model attributes. Known-safe values can be passed by wrapping them in Arel.sql(). (called from index at /Users/cho/Documents/github/friendship-circle/app/controllers/home_controller.rb:3)
+  [1m[36mUser Load (7.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  [1m[36mSetting Load (0.8ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_description"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "screenshot"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered home/index.slim within layouts/application (20.4ms)
+  [1m[36mSetting Load (0.7ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 212ms (Views: 192.6ms | ActiveRecord: 10.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-10-05 11:01:38 -0500
+Processing by HomeController#index as HTML
+DEPRECATION WARNING: Dangerous query method (method whose arguments are used as raw SQL) called with non-attribute argument(s): "RANDOM()". Non-attribute arguments will be disallowed in Rails 6.0. This method should not be called with user-provided values, such as request parameters or model attributes. Known-safe values can be passed by wrapping them in Arel.sql(). (called from index at /Users/cho/Documents/github/friendship-circle/app/controllers/home_controller.rb:3)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY RANDOM() LIMIT $1[0m  [["LIMIT", 3]]
+  Rendering home/index.slim within layouts/application
+  [1m[36mSetting Load (0.9ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_description"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "screenshot"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered home/index.slim within layouts/application (19.4ms)
+  [1m[36mSetting Load (0.6ms)[0m  [1m[34mSELECT  "settings".* FROM "settings" WHERE (thing_type is NULL and thing_id is NULL) AND "settings"."var" = $1 ORDER BY "settings"."id" ASC LIMIT $2[0m  [["var", "ring_name"], ["LIMIT", 1]]
+Completed 200 OK in 69ms (Views: 60.6ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaDFYTTFOdU9XZDFWM0JITW5odFUxbDFPRVpYUmxKWlVXZ0dPZ1pGVkE9PSIsImV4cCI6IjIwMTgtMTAtMDVUMTY6MDQ6NDMuMzE0WiIsInB1ciI6ImJsb2Jfa2V5In19--d0026d4b538d716f8c31fac51b0bb5f8a8eb6f27/da431cbd11883e7c15178137bd72374e.jpg?content_type=image%2Fjpeg&disposition=inline%3B+filename%3D%22da431cbd11883e7c15178137bd72374e.jpg%22%3B+filename%2A%3DUTF-8%27%27da431cbd11883e7c15178137bd72374e.jpg" for 127.0.0.1 at 2018-10-05 11:01:39 -0500
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"content_type"=>"image/jpeg", "disposition"=>"inline; filename=\"da431cbd11883e7c15178137bd72374e.jpg\"; filename*=UTF-8''da431cbd11883e7c15178137bd72374e.jpg", "encoded_key"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaDFYTTFOdU9XZDFWM0JITW5odFUxbDFPRVpYUmxKWlVXZ0dPZ1pGVkE9PSIsImV4cCI6IjIwMTgtMTAtMDVUMTY6MDQ6NDMuMzE0WiIsInB1ciI6ImJsb2Jfa2V5In19--d0026d4b538d716f8c31fac51b0bb5f8a8eb6f27", "filename"=>"da431cbd11883e7c15178137bd72374e"}
+[36m  Disk Storage (0.7ms) [0m[34mDownloaded file from key: W3Sn9guWpG2xmSYu8FWFRYQh[0m
+Completed 200 OK in 2ms (ActiveRecord: 0.0ms)
+
+

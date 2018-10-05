@@ -150,6 +150,13 @@
      box-shadow: 0 0 15px rgba(black, 0.25);
      transition: 0.5s;
 
+     .image {
+       img {
+         width: 100%;
+         height: auto;
+       }
+     }
+
      &:hover {
        box-shadow: 0 0 15px rgba(black, 0.5);
      }
@@ -292,6 +299,15 @@
      margin-bottom: 20px;
      transition: 0.5s;
 
+     .image {
+       float: right;
+       max-width: 300px;
+
+       img {
+         max-width: 100%;
+       }
+     }
+
      &.new {
        border-color: #C79C00;
      }
@@ -306,6 +322,7 @@
 
      nav.admin-links {
        margin: 20px 0 0;
+       clear: both;
 
        ul {
          margin: 0;

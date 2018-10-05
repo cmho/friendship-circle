@@ -1,4 +1,8 @@
 li[class="#{classname}"]
+  - if site.screenshot.attached?
+  .image
+    = image_tag url_for(site.screenshot)
+
   h3 #{site.site_name}
   p
     strong User:

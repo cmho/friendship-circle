@@ -24,6 +24,10 @@ h2 Join
     = f.text_area :site_description
 
   .form-row
+    = f.label :screenshot
+    = f.file_field :screenshot
+
+  .form-row
     = f.label :password
     - if @minimum_password_length
       em

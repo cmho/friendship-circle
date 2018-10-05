@@ -28,6 +28,10 @@ h2 Edit #{resource_name.to_s.humanize}
     = f.text_area :site_description
 
   .form-row
+    = f.label :screenshot
+    = f.file_field :screenshot
+
+  .form-row
     = f.label :password
     em (leave blank if you don't want to change it)
     = f.password_field :password, autocomplete: "off"
