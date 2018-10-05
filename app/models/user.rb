@@ -6,6 +6,8 @@ class User < ApplicationRecord
   validates_presence_of :email, :display_name, :site_name, :site_url, :site_description
   validates_uniqueness_of :email
 
+  has_one_attached :screenshot
+
   def next
     next_user = User.where('id > ?', self.id).order(id: :desc).where(is_active: true).first
     if next_user.nil?
